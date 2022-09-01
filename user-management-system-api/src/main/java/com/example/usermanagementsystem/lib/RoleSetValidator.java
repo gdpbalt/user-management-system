@@ -8,7 +8,7 @@ import javax.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class RolesSetValidator implements ConstraintValidator<ValidRolesSet, Set<Long>> {
+public class RoleSetValidator implements ConstraintValidator<ValidRoleSet, Set<Long>> {
     private final RoleService roleService;
 
     @Override

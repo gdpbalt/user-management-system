@@ -1,6 +1,6 @@
 package com.example.usermanagementsystem.security;
 
-import com.example.usermanagementsystem.exception.UserOrRoleNotFoundException;
+import com.example.usermanagementsystem.exception.EntityNotFoundException;
 import com.example.usermanagementsystem.model.User;
 import com.example.usermanagementsystem.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user;
         try {
             user = userService.findByName(username);
-        } catch (UserOrRoleNotFoundException e) {
+        } catch (EntityNotFoundException e) {
             throw new UsernameNotFoundException("User not found with name " + username);
         }
 

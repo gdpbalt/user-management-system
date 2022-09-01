@@ -4,7 +4,7 @@ import com.example.usermanagementsystem.dto.UserRequestDto;
 import com.example.usermanagementsystem.dto.UserResponseDto;
 import com.example.usermanagementsystem.dto.mapper.RequestDtoMapper;
 import com.example.usermanagementsystem.dto.mapper.ResponseDtoMapper;
-import com.example.usermanagementsystem.exception.UserOrRoleNotFoundException;
+import com.example.usermanagementsystem.exception.EntityNotFoundException;
 import com.example.usermanagementsystem.model.User;
 import com.example.usermanagementsystem.service.UserService;
 import io.swagger.annotations.ApiOperation;
@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/users")
+@RequestMapping("/user")
+@CrossOrigin
 public class UserController {
     private final UserService userService;
     private final RequestDtoMapper<UserRequestDto, User> userRequestDtoMapper;
@@ -55,8 +57,8 @@ public class UserController {
                                       @PathVariable Long id) {
         try {
             userService.findById(id);
-        } catch (UserOrRoleNotFoundException e) {
-            throw new UserOrRoleNotFoundException("User not found for update by id " + id);
+        } catch (EntityNotFoundException e) {
+            throw new EntityNotFoundException("User not found for update by id " + id);
         }
         User user = userRequestDtoMapper.toModel(dto);
         user.setId(id);

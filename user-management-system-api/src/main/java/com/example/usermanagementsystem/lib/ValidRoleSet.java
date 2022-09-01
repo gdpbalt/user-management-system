@@ -9,10 +9,10 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 @Documented
-@Constraint(validatedBy = RolesSetValidator.class)
+@Constraint(validatedBy = RoleSetValidator.class)
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ValidRolesSet {
+public @interface ValidRoleSet {
     String message() default "Invalid roles set";
 
     Class<?>[] groups() default {};

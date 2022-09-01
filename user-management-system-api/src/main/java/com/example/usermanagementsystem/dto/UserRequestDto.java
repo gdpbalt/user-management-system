@@ -1,7 +1,7 @@
 package com.example.usermanagementsystem.dto;
 
 import com.example.usermanagementsystem.lib.ValidPassword;
-import com.example.usermanagementsystem.lib.ValidRolesSet;
+import com.example.usermanagementsystem.lib.ValidRoleSet;
 import com.example.usermanagementsystem.lib.ValidStatus;
 import java.util.Set;
 import javax.validation.constraints.NotBlank;
@@ -26,7 +26,7 @@ public class UserRequestDto {
     @Size(min = 1, max = 16, message = "size should be between 1 and 16")
     @Pattern(regexp = "[a-zA-Z]+", message = "must not contain special characters")
     private String lastName;
-    @ValidRolesSet(message = "should have set id of existed roles")
+    @ValidRoleSet(message = "should have set id of existed roles")
     private Set<Long> roleIds;
     @ValidStatus(message = "should contain ACTIVE or INACTIVE")
     private String status;

@@ -1,6 +1,6 @@
 package com.example.usermanagementsystem.config;
 
-import com.example.usermanagementsystem.exception.UserOrRoleNotFoundException;
+import com.example.usermanagementsystem.exception.EntityNotFoundException;
 import com.example.usermanagementsystem.model.Role;
 import com.example.usermanagementsystem.model.RoleName;
 import com.example.usermanagementsystem.model.Status;
@@ -30,7 +30,7 @@ public class DataInitializer {
         Role userRole = roleService.findByName(RoleName.USER);
         try {
             userService.findByName(ADMIN_LOGIN);
-        } catch (UserOrRoleNotFoundException e) {
+        } catch (EntityNotFoundException e) {
             User adminUser = new User();
             adminUser.setName(ADMIN_LOGIN);
             adminUser.setPassword(passwordEncoder.encode(ADMIN_PASSWORD));
@@ -42,7 +42,7 @@ public class DataInitializer {
         }
         try {
             userService.findByName(USER_LOGIN);
-        } catch (UserOrRoleNotFoundException e) {
+        } catch (EntityNotFoundException e) {
             User userUser = new User();
             userUser.setName(USER_LOGIN);
             userUser.setPassword(passwordEncoder.encode(USER_PASSWORD));

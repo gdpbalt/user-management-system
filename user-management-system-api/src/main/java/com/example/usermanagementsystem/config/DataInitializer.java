@@ -1,13 +1,11 @@
 package com.example.usermanagementsystem.config;
 
 import com.example.usermanagementsystem.exception.EntityNotFoundException;
-import com.example.usermanagementsystem.model.Role;
 import com.example.usermanagementsystem.model.RoleName;
 import com.example.usermanagementsystem.model.Status;
 import com.example.usermanagementsystem.model.User;
 import com.example.usermanagementsystem.service.RoleService;
 import com.example.usermanagementsystem.service.UserService;
-import java.util.Set;
 import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,8 +24,6 @@ public class DataInitializer {
 
     @PostConstruct
     public void dataInitialisation() {
-        Role adminRole = roleService.findByName(RoleName.ADMIN);
-        Role userRole = roleService.findByName(RoleName.USER);
         try {
             userService.findByName(ADMIN_LOGIN);
         } catch (EntityNotFoundException e) {
@@ -36,7 +32,7 @@ public class DataInitializer {
             adminUser.setPassword(passwordEncoder.encode(ADMIN_PASSWORD));
             adminUser.setFirstName("User for admin purpose");
             adminUser.setLastName("");
-            adminUser.setRoles(Set.of(adminRole, userRole));
+            adminUser.setRole(roleService.findByName(RoleName.ADMIN));
             adminUser.setStatus(Status.ACTIVE);
             userService.save(adminUser);
         }
@@ -48,7 +44,7 @@ public class DataInitializer {
             userUser.setPassword(passwordEncoder.encode(USER_PASSWORD));
             userUser.setFirstName("User for admin purpose");
             userUser.setLastName("");
-            userUser.setRoles(Set.of(userRole));
+            userUser.setRole(roleService.findByName(RoleName.USER));
             userUser.setStatus(Status.ACTIVE);
             userService.save(userUser);
         }

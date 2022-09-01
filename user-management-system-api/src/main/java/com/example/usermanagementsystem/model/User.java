@@ -1,7 +1,6 @@
 package com.example.usermanagementsystem.model;
 
-import java.time.ZonedDateTime;
-import java.util.Set;
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,9 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,13 +28,10 @@ public class User {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Role role;
     @Enumerated(EnumType.STRING)
     private Status status;
     @Column(name = "created_at")
-    private ZonedDateTime createdAt = ZonedDateTime.now();
+    private LocalDateTime createdAt = LocalDateTime.now();
 }

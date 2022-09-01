@@ -2,12 +2,10 @@ package com.example.usermanagementsystem.dto.mapper;
 
 import com.example.usermanagementsystem.dto.UserRequestDto;
 import com.example.usermanagementsystem.dto.UserResponseDto;
-import com.example.usermanagementsystem.model.Role;
+import com.example.usermanagementsystem.model.RoleName;
 import com.example.usermanagementsystem.model.Status;
 import com.example.usermanagementsystem.model.User;
 import com.example.usermanagementsystem.service.RoleService;
-import java.util.Set;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -24,12 +22,10 @@ public class UserMapper implements RequestDtoMapper<UserRequestDto, User>,
         user.setPassword(dto.getPassword());
         user.setFirstName(dto.getFirstName());
         user.setLastName(dto.getLastName());
-        user.setStatus(Status.valueOf(dto.getStatus()));
+        user.setStatus(Status.valueOf(dto.getStatus().toUpperCase()));
 
-        Set<Role> roles = dto.getRoleIds().stream()
-                .map(roleService::findById)
-                .collect(Collectors.toSet());
-        user.setRoles(roles);
+        RoleName roleName = RoleName.valueOf(dto.getRole().toUpperCase());
+        user.setRole(roleService.findByName(roleName));
         return user;
     }
 
@@ -40,13 +36,9 @@ public class UserMapper implements RequestDtoMapper<UserRequestDto, User>,
         dto.setName(user.getName());
         dto.setFirstName(user.getFirstName());
         dto.setLastName(user.getLastName());
+        dto.setRole(user.getRole().getName());
         dto.setStatus(user.getStatus().name());
         dto.setCreatedAt(user.getCreatedAt());
-
-        Set<Long> roleIds = user.getRoles().stream()
-                .map(Role::getId)
-                .collect(Collectors.toSet());
-        dto.setRoleIds(roleIds);
         return dto;
     }
 }

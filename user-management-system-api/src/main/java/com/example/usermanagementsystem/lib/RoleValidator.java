@@ -1,27 +1,21 @@
 package com.example.usermanagementsystem.lib;
 
-import com.example.usermanagementsystem.exception.EntityNotFoundException;
-import com.example.usermanagementsystem.service.RoleService;
-import java.util.Set;
+import com.example.usermanagementsystem.model.RoleName;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class RoleSetValidator implements ConstraintValidator<ValidRoleSet, Set<Long>> {
-    private final RoleService roleService;
-
+public class RoleValidator implements ConstraintValidator<ValidRole, String> {
     @Override
-    public boolean isValid(Set<Long> roleIds, ConstraintValidatorContext context) {
-        if (roleIds == null || roleIds.isEmpty()) {
+    public boolean isValid(String roleName, ConstraintValidatorContext context) {
+        if (roleName == null) {
             return false;
         }
-        for (Long id : roleIds) {
-            try {
-                roleService.findById(id);
-            } catch (EntityNotFoundException e) {
-                return false;
-            }
+        try {
+            RoleName.valueOf(roleName);
+        } catch (IllegalArgumentException e) {
+            return false;
         }
         return true;
     }

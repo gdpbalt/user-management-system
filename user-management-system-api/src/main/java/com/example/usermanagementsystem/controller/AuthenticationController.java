@@ -5,8 +5,8 @@ import com.example.usermanagementsystem.exception.AuthenticationException;
 import com.example.usermanagementsystem.model.User;
 import com.example.usermanagementsystem.security.AuthenticationService;
 import com.example.usermanagementsystem.security.jwt.JwtTokenProvider;
+import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,9 +27,7 @@ public class AuthenticationController {
         User user = authenticationService.login(userLoginDto.getLogin(),
                 userLoginDto.getPassword());
         String token = jwtTokenProvider.createToken(user.getName(),
-                user.getRoles().stream()
-                        .map(role -> role.getName().name())
-                        .collect(Collectors.toList()));
+                List.of(user.getRole().getName().name()));
         return new ResponseEntity<>(Map.of("token", token), HttpStatus.OK);
     }
 }

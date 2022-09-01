@@ -1,6 +1,6 @@
 package com.example.usermanagementsystem.lib;
 
-import com.example.usermanagementsystem.exception.UserOrRoleNotFoundException;
+import com.example.usermanagementsystem.exception.EntityNotFoundException;
 import com.example.usermanagementsystem.service.RoleService;
 import java.util.Set;
 import javax.validation.ConstraintValidator;
@@ -19,7 +19,7 @@ public class RolesSetValidator implements ConstraintValidator<ValidRolesSet, Set
         for (Long id : roleIds) {
             try {
                 roleService.findById(id);
-            } catch (UserOrRoleNotFoundException e) {
+            } catch (EntityNotFoundException e) {
                 return false;
             }
         }

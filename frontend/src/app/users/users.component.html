@@ -1,5 +1,5 @@
-<div class="my-2 mx-5">
-  <div class="my-2 fs-4">Users list</div>
+<div>
+  <div class="my-2 fs-4 text-center">Users list</div>
 
   <table class="table">
     <thead class="table-primary">
@@ -25,7 +25,8 @@
         <td>{{ user.status }}</td>
         <td>{{ user.createdAt | date: 'dd.MM.YYYY HH:mm' }}</td>
         <td>
-          <a class="btn btn-sm btn-outline-primary" href="/user/{{ user.id }}">Detail</a>
+          <a class="btn btn-sm btn-outline-primary me-3" href="/user/view/{{ user.id }}">View</a>
+          <a class="btn btn-sm btn-outline-primary" href="/user/edit/{{ user.id }}">Edit</a>
         </td>
       </tr>
     </tbody>

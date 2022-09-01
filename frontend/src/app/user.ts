@@ -5,7 +5,7 @@ export interface User {
   name : string;
   firstName: string;
   lastName: string;
-  roleIds : number[];
+  role : string;
   status : string;
   createdAt : Date;
 }

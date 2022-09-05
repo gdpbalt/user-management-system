@@ -29,11 +29,36 @@ export class UserService {
       );
   }
 
+  checkIfUserExist<Data>(name: string): Observable<boolean> {
+    const url = `${this.userApiUrl}/by-name?name=${name}`;
+    return this.http.get(url, { responseType: 'text', observe: 'response' })
+      .pipe(
+        map(data => true),
+        catchError(data => of(false))
+      );
+  }
+
   getUser(id: number): Observable<User> {
     const url = `${this.userApiUrl}/${id}`;
     return this.http.get<User>(url).pipe(
       tap(_ => this.log(`fetched user by id=${id}`)),
       catchError(this.handleError<User>(`getUser id=${id}`))
+    );
+  }
+
+  addUser(user: User): Observable<User> {
+    return this.http.post<User>(this.userApiUrl, user, this.httpOptions).pipe(
+      tap((newUser: User) => this.log(`added user w/ id=${newUser.id}`)),
+      catchError(this.handleError<User>('addUser'))
+    );
+  }
+
+  updateUser(user: User): Observable<any> {
+    const url = `${this.userApiUrl}/${user.id}`
+
+    return this.http.put(url, user, this.httpOptions).pipe(
+      tap(_ => this.log(`updated user id=${user.id}`)),
+      catchError(this.handleError<any>('updateUser'))
     );
   }
 

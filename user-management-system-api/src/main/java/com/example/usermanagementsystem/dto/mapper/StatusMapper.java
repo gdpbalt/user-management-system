@@ -1,17 +1,15 @@
 package com.example.usermanagementsystem.dto.mapper;
 
-import com.example.usermanagementsystem.dto.RoleResponseDto;
-import com.example.usermanagementsystem.model.Role;
+import com.example.usermanagementsystem.dto.StatusResponseDto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RoleMapper implements ResponseDtoMapper<RoleResponseDto, Role> {
+public class StatusMapper implements ResponseDtoMapper<StatusResponseDto, String> {
 
     @Override
-    public RoleResponseDto toDto(Role role) {
-        RoleResponseDto dto = new RoleResponseDto();
-        dto.setId(role.getId());
-        dto.setName(role.getName().name());
+    public StatusResponseDto toDto(String status) {
+        StatusResponseDto dto = new StatusResponseDto();
+        dto.setName(status);
         return dto;
     }
 }

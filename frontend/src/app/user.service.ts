@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
@@ -59,6 +60,22 @@ export class UserService {
     return this.http.put(url, user, this.httpOptions).pipe(
       tap(_ => this.log(`updated user id=${user.id}`)),
       catchError(this.handleError<any>('updateUser'))
+    );
+  }
+
+  lockUser(id: number): Observable<User> {
+    const url = `${this.userApiUrl}/${id}/lock`;
+    return this.http.get<User>(url).pipe(
+      tap(_ => this.log(`locked user by id=${id}`)),
+      catchError(this.handleError<User>(`lockUser id=${id}`))
+    );
+  }
+
+  unlockUser(id: number): Observable<User> {
+    const url = `${this.userApiUrl}/${id}/unlock`;
+    return this.http.get<User>(url).pipe(
+      tap(_ => this.log(`unlocked user by id=${id}`)),
+      catchError(this.handleError<User>(`unlockUser id=${id}`))
     );
   }
 

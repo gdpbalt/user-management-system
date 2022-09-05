@@ -9,10 +9,10 @@ import { UserService } from '../user.service';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  users : User[] = [];
-  
+  users: User[] = [];
+
   constructor(private userService: UserService) { }
-  
+
   ngOnInit(): void {
     this.getUsers();
   }
@@ -20,6 +20,22 @@ export class UsersComponent implements OnInit {
   getUsers(): void {
     this.userService.getUsers()
       .subscribe(u => this.users = u);
+  }
+
+  lockUser(id: number): void {
+    this.userService.lockUser(id)
+      .subscribe({
+        next: () => this.ngOnInit(),
+        error: (e) => console.error(e)
+      });
+  }
+
+  unlockUser(id: number): void {
+    this.userService.unlockUser(id)
+      .subscribe({
+        next: () => this.ngOnInit(),
+        error: (e) => console.error(e)
+      });
   }
 
 }

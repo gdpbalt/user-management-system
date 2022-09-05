@@ -18,10 +18,11 @@ import { repeatePasswordValidator } from '../shared/repeat-password-validation';
   styleUrls: ['./user-edit.component.css']
 })
 export class UserEditComponent implements OnInit {
+
   isEditComponent: boolean = false;
   title: string = '';
+  userId?: number;
   userForm!: FormGroup;
-  user?: User;
   roles: Role[] = [];
   statuses: Status[] = [];
   isUserExist: boolean = false;
@@ -43,16 +44,24 @@ export class UserEditComponent implements OnInit {
     this.getStatuses();
     if (this.isEditComponent) {
       this.title = "Edit user's detail";
-      this.getUser();
+      this.userId = Number(this.route.snapshot.paramMap.get('id'));
+      this.getUser(this.userId);
     } else {
       this.title = "Add new user";
     }
   }
 
-  getUser(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+  getUser(id: number): void {
     this.userService.getUser(id)
-      .subscribe(u => { this.user = u; this.setForm() });
+      .subscribe(user => {
+        this.userForm.patchValue({
+          name: user.name,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          role: user.role,
+          status: user.status,
+        });
+      });
   }
 
   getRoles(): void {
@@ -107,16 +116,6 @@ export class UserEditComponent implements OnInit {
     }, { validators: repeatePasswordValidator });
   }
 
-  setForm(): void {
-    this.userForm.patchValue({
-      name: this.user?.name,
-      firstName: this.user?.firstName,
-      lastName: this.user?.lastName,
-      role: this.user?.role,
-      status: this.user?.status,
-    });
-  }
-
   submitForm(): void {
     if (this.userForm.invalid) {
       this.userForm.markAllAsTouched();
@@ -138,7 +137,7 @@ export class UserEditComponent implements OnInit {
 
   saveData(): void {
     const userChange: User = {
-      id: Number(this.user?.id),
+      id: Number(this.userId),
       name: this.name?.value,
       password: this.password?.value,
       firstName: this.firstName?.value,

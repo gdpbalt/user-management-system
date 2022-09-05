@@ -1,0 +1,172 @@
+<form class="container col-7" [formGroup]="userForm" (ngSubmit)="submitForm()">
+  <div class="my-3 fs-4 text-center">{{ title }}</div>
+
+  <div *ngIf="isUserExist" class="text-center text-danger">
+    User already exist
+  </div>
+
+  <table class="table my-2">
+
+    <tr class="align-top">
+      <th class="text-end text-muted col-5">
+        <label for="name" class="form-label">Name</label>
+      </th>
+      <td>
+        <input type="text" id="name" class="form-control form-control-sm" formControlName="name"
+          placeHolder="User name">
+        <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="text-danger small">
+          <div *ngIf="name?.errors?.['required']">
+            Field is required
+          </div>
+          <div *ngIf="name?.errors?.['minlength']">
+            Field must be at least 3 characters long.
+          </div>
+          <div *ngIf="name?.errors?.['maxlength']">
+            Field must be up to 16 characters long.
+          </div>
+          <div *ngIf="name?.errors?.['pattern']">
+            Field should contain only latin characters.
+          </div>
+        </div>
+      </td>
+    </tr>
+
+    <tr class="align-top">
+      <th class="text-end text-muted">
+        <label for="password" class="form-label">Password</label>
+      </th>
+      <td>
+        <input type="password" id="password" class="form-control form-control-sm" formControlName="password"
+          placeHolder="Password" autocomplete="off">
+        <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="text-danger small">
+          <div *ngIf="password?.errors?.['required']">
+            Field is required
+          </div>
+          <div *ngIf="password?.errors?.['minlength']">
+            Field must be at least 3 characters long.
+          </div>
+          <div *ngIf="password?.errors?.['maxlength']">
+            Field must be up to 16 characters long.
+          </div>
+          <div *ngIf="password?.errors?.['pattern']">
+            Field should contain only latin characters and numbers.
+          </div>
+          <div *ngIf="password?.errors?.['passwordValid']">
+            Field should contain at least one latin character and number.
+          </div>
+        </div>
+      </td>
+    </tr>
+
+    <tr class="align-top">
+      <th class="text-end text-muted">
+        <label for="repeatPassword" class="form-label">Repeat Password</label>
+      </th>
+      <td>
+        <input type="password" id="repeatPassword" class="form-control form-control-sm" formControlName="repeatPassword"
+          placeHolder="Password" autocomplete="off">
+        <div *ngIf="repeatPassword?.invalid && (repeatPassword?.dirty || repeatPassword?.touched)"
+          class="text-danger small">
+          <div *ngIf="repeatPassword?.errors?.['required']">
+            Field is required
+          </div>
+        </div>
+        <div *ngIf="userForm.errors?.['repeatePassword'] && (repeatPassword?.dirty || repeatPassword?.touched)"
+          class="text-danger small">
+          Repeat Password should be equal with Password.
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <th class="text-end text-muted">
+        <label for="firstName" class="form-label">First Name</label>
+      </th>
+      <td>
+        <input type="text" id="firstName" class="form-control form-control-sm" formControlName="firstName"
+          placeholder="First name">
+        <div *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)" class="text-danger small">
+          <div *ngIf="firstName?.errors?.['required']">
+            Field is required
+          </div>
+          <div *ngIf="firstName?.errors?.['minlength']">
+            Field must be at least 1 characters long.
+          </div>
+          <div *ngIf="firstName?.errors?.['maxlength']">
+            Field must be up to 16 characters long.
+          </div>
+          <div *ngIf="firstName?.errors?.['pattern']">
+            Field should contain only latin characters and numbers.
+          </div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <th class="text-end text-muted">
+        <label for="lastName" class="form-label">Last Name</label>
+      </th>
+      <td>
+        <input type="text" id="lastName" class="form-control form-control-sm" formControlName="lastName"
+          placeholder="Last name">
+        <div *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)" class="text-danger small">
+          <div *ngIf="lastName?.errors?.['required']">
+            Field is required
+          </div>
+          <div *ngIf="lastName?.errors?.['minlength']">
+            Field must be at least 1 characters long.
+          </div>
+          <div *ngIf="lastName?.errors?.['maxlength']">
+            Field must be up to 16 characters long.
+          </div>
+          <div *ngIf="lastName?.errors?.['pattern']">
+            Field should contain only latin characters and numbers.
+          </div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <th class="text-end text-muted">
+        <label for="role" class="form-label">Role</label>
+      </th>
+      <td>
+        <select id="role" class="form-select form-select-sm" aria-label=".form-select-sm role" formControlName="role">
+          <option *ngFor="let roleName of roles" value="{{ roleName.name }}"
+            [selected]="roleName.name.toLowerCase() === role?.value?.toLowerCase()">
+            {{ roleName.name | titlecase }}
+          </option>
+        </select>
+        <div *ngIf="role?.invalid && (role?.dirty || role?.touched)" class="text-danger small">
+          <div *ngIf="role?.errors?.['required']">
+            Field is required
+          </div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <th class="text-end text-muted">
+        <label for="status" class="form-label">Status</label>
+      </th>
+      <td>
+        <select id="status" class="form-select form-select-sm" aria-label=".form-select-sm status"
+          formControlName="status">
+          <option *ngFor="let statusName of statuses" value="{{ statusName.name }}">
+            {{ statusName.name | titlecase }}
+          </option>
+        </select>
+        <div *ngIf="status?.invalid && (status?.dirty || status?.touched)" class="text-danger small">
+          <div *ngIf="status?.errors?.['required']">
+            Field is required
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <div class="mt-3 text-center">
+    <button class="btn btn-outline-success me-3">Save</button>
+    <button class="btn btn-outline-danger" (click)="goBack()">Cancel</button>
+  </div>
+</form>

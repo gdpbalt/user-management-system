@@ -11,4 +11,8 @@ public interface UserService {
     List<User> findAll();
 
     User save(User user);
+
+    User lock(Long id);
+
+    User unlock(Long id);
 }

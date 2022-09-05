@@ -1,7 +1,7 @@
 package com.example.usermanagementsystem.security;
 
 import com.example.usermanagementsystem.exception.AuthenticationException;
-import com.example.usermanagementsystem.exception.UserOrRoleNotFoundException;
+import com.example.usermanagementsystem.exception.EntityNotFoundException;
 import com.example.usermanagementsystem.model.User;
 import com.example.usermanagementsystem.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User user;
         try {
             user = userService.findByName(login);
-        } catch (UserOrRoleNotFoundException e) {
+        } catch (EntityNotFoundException e) {
             throw new AuthenticationException(INCORRECT_USERNAME_OR_PASSWORD);
         }
         if (passwordEncoder.matches(password, user.getPassword())) {

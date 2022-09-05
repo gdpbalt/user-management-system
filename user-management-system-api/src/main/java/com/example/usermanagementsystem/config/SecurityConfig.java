@@ -5,7 +5,6 @@ import com.example.usermanagementsystem.security.jwt.JwtConfigurer;
 import com.example.usermanagementsystem.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -38,10 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/login", "/").permitAll()
-                .antMatchers(HttpMethod.GET, "/users/**").hasAnyRole(USER, ADMIN)
-                .antMatchers(HttpMethod.GET, "/roles").hasAnyRole(USER, ADMIN)
-                .antMatchers("/users/**").hasRole(ADMIN)
+                .antMatchers("/login", "/user/**", "/role/**", "/status").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

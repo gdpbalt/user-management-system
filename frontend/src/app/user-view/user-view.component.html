@@ -1,0 +1,41 @@
+<div class="container col-6">
+  <div class="my-3 fs-4 text-center">View user's detail</div>
+
+  <div *ngIf="user" class="my-2">
+    <table class="table" style="border-collapse: separate; border-spacing:15px 10px;">
+      <tr>
+        <th class="col-5 text-end text-muted">Id</th>
+        <td>{{ user.id }}</td>
+      </tr>
+      <tr>
+        <th class="text-end text-muted">Name</th>
+        <td>{{ user.name }}</td>
+      </tr>
+      <tr>
+        <th class="text-end text-muted">First Name</th>
+        <td>{{ user.firstName }}</td>
+      </tr>
+      <tr>
+        <th class="text-end text-muted">Last Name</th>
+        <td>{{ user.lastName }}</td>
+      </tr>
+      <tr>
+        <th class="text-end text-muted">Roles</th>
+        <td>{{ user.role | titlecase }}</td>
+      </tr>
+      <tr>
+        <th class="text-end text-muted">Status</th>
+        <td>{{ user.status | titlecase }}</td>
+      </tr>
+
+      <tr>
+        <th class="text-end text-muted">Created At</th>
+        <td>{{ user.createdAt | date: 'dd.MM.YYYY HH:mm' }}</td>
+      </tr>
+    </table>
+
+    <div class="mt-3 text-center">
+      <button class="btn btn-outline-info me-3" (click)="goBack()">Go back</button>
+    </div>
+  </div>
+</div>

@@ -47,6 +47,18 @@ public class UserController {
         return userResponseDtoMapper.toDto(userService.findById(id));
     }
 
+    @GetMapping("/{id}/lock")
+    @ApiOperation(value = "Lock user")
+    public UserResponseDto lockUser(@PathVariable Long id) {
+        return userResponseDtoMapper.toDto(userService.lock(id));
+    }
+
+    @GetMapping("/{id}/unlock")
+    @ApiOperation(value = "Unlock user")
+    public UserResponseDto unlockUser(@PathVariable Long id) {
+        return userResponseDtoMapper.toDto(userService.unlock(id));
+    }
+
     @GetMapping("/by-name")
     @ApiOperation(value = "Get information about the user by name")
     public UserResponseDto findUserById(@RequestParam String name) {

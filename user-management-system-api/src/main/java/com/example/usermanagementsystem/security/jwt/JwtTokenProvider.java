@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 public class JwtTokenProvider {
     @Value("${security.jwt.token.secret-key:secret}")
     private String secretKey;
-    @Value("${security.jwt.token.expire-length:3600000}")
+    @Value("${security.jwt.token.jwtExpirationSeconds:300}")
     private long validityInMilliseconds;
     private final UserDetailsService userDetailsService;
 
@@ -39,7 +39,7 @@ public class JwtTokenProvider {
         Claims claims = Jwts.claims().setSubject(login);
         claims.put("roles", roles);
         Date now = new Date();
-        Date validity = new Date(now.getTime() + validityInMilliseconds);
+        Date validity = new Date(now.getTime() + validityInMilliseconds * 1000);
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(now)

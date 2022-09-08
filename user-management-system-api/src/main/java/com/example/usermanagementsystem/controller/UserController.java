@@ -61,7 +61,7 @@ public class UserController {
 
     @GetMapping("/by-name")
     @ApiOperation(value = "Get information about the user by name")
-    public UserResponseDto findUserById(@RequestParam String name) {
+    public UserResponseDto findUserByName(@RequestParam String name) {
         log.info("Find user by name: {}", name);
         return userResponseDtoMapper.toDto(userService.findByName(name));
     }

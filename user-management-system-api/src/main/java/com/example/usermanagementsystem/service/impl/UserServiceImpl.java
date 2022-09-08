@@ -1,9 +1,10 @@
-package com.example.usermanagementsystem.service;
+package com.example.usermanagementsystem.service.impl;
 
 import com.example.usermanagementsystem.exception.EntityNotFoundException;
 import com.example.usermanagementsystem.model.Status;
 import com.example.usermanagementsystem.model.User;
 import com.example.usermanagementsystem.repository.UserRepository;
+import com.example.usermanagementsystem.service.UserService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;

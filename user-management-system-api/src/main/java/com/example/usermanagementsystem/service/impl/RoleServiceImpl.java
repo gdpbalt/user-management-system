@@ -1,9 +1,10 @@
-package com.example.usermanagementsystem.service;
+package com.example.usermanagementsystem.service.impl;
 
 import com.example.usermanagementsystem.exception.EntityNotFoundException;
 import com.example.usermanagementsystem.model.Role;
 import com.example.usermanagementsystem.model.RoleName;
 import com.example.usermanagementsystem.repository.RoleRepository;
+import com.example.usermanagementsystem.service.RoleService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -13,6 +13,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { UsersComponent } from './users/users.component';
 import { UserViewComponent } from './user-view/user-view.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
     imports: [
@@ -30,6 +31,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
     UsersComponent,
     UserViewComponent,
     UserEditComponent,
+    LoginComponent,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

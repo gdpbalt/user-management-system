@@ -27,7 +27,7 @@ export class UsersComponent implements OnInit {
       .subscribe({
         next: () => this.ngOnInit(),
         error: (e) => console.error(e)
-      });
+      })
   }
 
   unlockUser(id: number): void {

@@ -1,4 +1,4 @@
-package com.example.usermanagementsystem.controller;
+package com.example.usermanagementsystem.advise;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -17,7 +17,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @Log4j2
-@ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override

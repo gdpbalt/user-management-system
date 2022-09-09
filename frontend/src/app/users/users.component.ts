@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User } from '../user';
-import { UserService } from '../user.service';
+import { User } from '../_model/user';
+import { UserService } from '../_service/user.service';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  styleUrls: []
 })
 export class UsersComponent implements OnInit {
   users: User[] = [];

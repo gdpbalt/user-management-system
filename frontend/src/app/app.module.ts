@@ -7,13 +7,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
 import { MessagesComponent } from './messages/messages.component';
 import { UsersComponent } from './users/users.component';
 import { UserViewComponent } from './user-view/user-view.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { LoginComponent } from './login/login.component';
+import { authInterceptorProviders } from './_helper/auth.interceptor';
 
 @NgModule({
     imports: [
@@ -25,15 +24,13 @@ import { LoginComponent } from './login/login.component';
   ],
   declarations: [
     AppComponent,
-    HeaderComponent,
-    FooterComponent,
     MessagesComponent,
     UsersComponent,
     UserViewComponent,
     UserEditComponent,
     LoginComponent,
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

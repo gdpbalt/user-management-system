@@ -3,19 +3,19 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { UserService } from '../user.service';
-import { RoleService } from 'src/app/role.service';
-import { StatusService } from '../status.service';
-import { User } from "../user";
-import { Role } from 'src/app/role';
-import { Status } from '../status';
-import { passwordValidator } from '../shared/password-validation';
-import { repeatePasswordValidator } from '../shared/repeat-password-validation';
+import { UserService } from '../_service/user.service';
+import { RoleService } from 'src/app/_service/role.service';
+import { StatusService } from '../_service/status.service';
+import { User } from "../_model/user";
+import { Role } from 'src/app/_model/role';
+import { Status } from '../_model/status';
+import { passwordValidator } from '../_helper/password-validation';
+import { repeatePasswordValidator } from '../_helper/repeat-password-validation';
 
 @Component({
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
-  styleUrls: ['./user-edit.component.css']
+  styleUrls: []
 })
 export class UserEditComponent implements OnInit {
 

@@ -1,28 +1,27 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { Role } from './role';
+import { Role } from '../_model/role';
 import { MessageService } from './message.service';
+
+const API_URL = "http://localhost:8080/"
+const API_URL_ROLE = 'role';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoleService {
-  private userApiUrl = 'http://localhost:8080/role';
 
   constructor(
     private http: HttpClient,
     private messageService: MessageService) {
   }
 
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
 
   getRoles(): Observable<Role[]> {
-    return this.http.get<Role[]>(this.userApiUrl)
+    return this.http.get<Role[]>(API_URL + API_URL_ROLE)
       .pipe(
         tap(_ => this.log('fetched roles')),
         catchError(this.handleError<Role[]>('getRoles', []))

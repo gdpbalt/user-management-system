@@ -1,45 +1,55 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
-import { AuthService } from '../auth.service';
+import { AuthService } from '../_service/auth.service';
+import { TokenStorageService } from '../_service/token-storage.service';
+
+const USER_PAGE = '/user';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: []
 })
 export class LoginComponent implements OnInit {
   formLogin!: FormGroup;
-  isLoginIncorrect = false;
+  isLoginFailed = false;
+  returnUrl: string = '';
 
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
+    private tokenStorage: TokenStorageService,
+    private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit(): void {
     this.formLogin = this.formBuilder.group({
-      login: ['', Validators.required],
+      username: ['', Validators.required],
       password: ['', Validators.required]
     });
+    this.tokenStorage.signOut();
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || USER_PAGE;
   }
 
   login() {
-    this.isLoginIncorrect = false;
-    const val = this.formLogin.value;
-    if (val.login && val.password) {
-      this.authService.login(val.login, val.password)
-        .subscribe({
-          next: () => {
-            console.log("User is logged in");
-            this.router.navigateByUrl('/');
-          },
-          error: (e) => {
-            console.error(e);
-            this.isLoginIncorrect = true;
-          }
-        })
-    }
-  }
+    const login: string = this.formLogin.get('username')?.value;
+    const password: string = this.formLogin.get('password')?.value;
 
+    this.authService.login(login, password)
+      .subscribe({
+        next: (data) => {
+          this.tokenStorage.saveToken(data.accessToken);
+          this.tokenStorage.saveRefreshToken(data.refreshToken);
+          this.tokenStorage.saveUser(data);
+          this.router.navigateByUrl(this.returnUrl);
+          return of(false);
+        },
+
+        error: (error) => {
+          this.isLoginFailed = true;
+        }
+      });
+  }
 }

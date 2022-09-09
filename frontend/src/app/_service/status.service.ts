@@ -1,27 +1,24 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Status } from './status';
+import { Status } from '../_model/status';
 import { MessageService } from './message.service';
+
+const API_URL = "http://localhost:8080/"
+const API_URL_STATUS = "status"
 
 @Injectable({
   providedIn: 'root'
 })
 export class StatusService {
-  private userApiUrl = 'http://localhost:8080/status';
-
   constructor(
     private http: HttpClient,
     private messageService: MessageService) {
   }
 
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
-
   getStatuses(): Observable<Status[]> {
-    return this.http.get<Status[]>(this.userApiUrl)
+    return this.http.get<Status[]>(API_URL + API_URL_STATUS)
       .pipe(
         tap(_ => this.log('fetched statuses')),
         catchError(this.handleError<Status[]>('getStatuses', []))

@@ -5,6 +5,7 @@ import com.example.usermanagementsystem.security.jwt.JwtConfigurer;
 import com.example.usermanagementsystem.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -17,8 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private static final String ADMIN = RoleName.ADMIN.name();
-    private static final String USER = RoleName.USER.name();
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
@@ -37,8 +36,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/login", "/user/**", "/role/**", "/status",
-                        "/refreshtoken").permitAll()
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .antMatchers("/login", "/refreshtoken").permitAll()
+                .antMatchers(HttpMethod.GET, "/user/**", "/role", "/status", "/signout")
+                .authenticated()
+                .antMatchers("/user/**").hasRole(RoleName.ADMIN.name())
                 .anyRequest()
                 .authenticated()
                 .and()

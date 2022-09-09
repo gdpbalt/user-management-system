@@ -13,7 +13,7 @@ public class RoleValidator implements ConstraintValidator<ValidRole, String> {
             return false;
         }
         try {
-            RoleName.valueOf(roleName);
+            RoleName.valueOf(roleName.toUpperCase());
         } catch (IllegalArgumentException e) {
             return false;
         }

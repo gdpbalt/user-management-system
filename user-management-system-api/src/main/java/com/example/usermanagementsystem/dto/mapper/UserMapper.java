@@ -23,7 +23,6 @@ public class UserMapper implements RequestDtoMapper<UserRequestDto, User>,
         user.setFirstName(dto.getFirstName());
         user.setLastName(dto.getLastName());
         user.setStatus(Status.valueOf(dto.getStatus().toUpperCase()));
-
         RoleName roleName = RoleName.valueOf(dto.getRole().toUpperCase());
         user.setRole(roleService.findByName(roleName));
         return user;

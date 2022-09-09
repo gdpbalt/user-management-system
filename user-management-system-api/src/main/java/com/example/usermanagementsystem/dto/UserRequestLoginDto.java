@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class UserLoginDto {
+public class UserRequestLoginDto {
     @NotBlank(message = "can't be null or blank")
     private String login;
     @NotBlank(message = "can't be null or blank")

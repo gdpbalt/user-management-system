@@ -7,6 +7,8 @@ public interface RefreshTokenService {
 
     RefreshToken findByToken(String token);
 
+    RefreshToken findByUser(User user);
+
     RefreshToken createRefreshToken(User user);
 
     RefreshToken renewRefreshToken(RefreshToken refreshToken);
@@ -14,6 +16,10 @@ public interface RefreshTokenService {
     RefreshToken verifyExpiration(RefreshToken refreshToken);
 
     Long deleteByUserId(Long userId);
+
+    void deleteByUser(User user);
+
+    Long deleteByToken(RefreshToken token);
 
     void deleteExpiredTokens();
 }

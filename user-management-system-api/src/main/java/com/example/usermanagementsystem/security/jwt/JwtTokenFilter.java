@@ -6,18 +6,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import java.io.IOException;
 import java.util.Date;
-import lombok.RequiredArgsConstructor;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 @RequiredArgsConstructor
+@Log4j2()
 public class JwtTokenFilter extends HttpFilter {
     private final JwtTokenProvider jwtTokenProvider;
 
@@ -27,16 +29,22 @@ public class JwtTokenFilter extends HttpFilter {
             throws IOException, ServletException {
         try {
             String token = jwtTokenProvider.resolveToken(request);
+            log.debug(request.getMethod() + " " + request.getRequestURL().toString()
+                    + "?" + request.getQueryString());
+            log.debug("Token: {}", token == null ? "not found" : token);
             if (token != null && jwtTokenProvider.validateToken(token)) {
                 Authentication auth = jwtTokenProvider.getAuthentication(token);
                 SecurityContextHolder.getContext().setAuthentication(auth);
             }
+            log.debug("Move to next filter");
             filterChain.doFilter(request, response);
         } catch (RuntimeException e) {
-            ErrorMessageDto errorResponse = new ErrorMessageDto(
-                    HttpStatus.FORBIDDEN.value(), new Date(), e.getMessage(), "");
+            log.debug("Has problem with token verified");
+            response.addHeader("Access-Control-Allow-Origin", "*");
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-            response.setStatus(HttpStatus.FORBIDDEN.value());
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+            ErrorMessageDto errorResponse = new ErrorMessageDto(
+                    HttpStatus.UNAUTHORIZED.value(), new Date(), e.getMessage(), "");
             response.getWriter().write(convertObjectToJson(errorResponse));
         }
     }

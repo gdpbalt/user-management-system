@@ -11,7 +11,7 @@ public class StatusValidator implements ConstraintValidator<ValidStatus, String>
             return false;
         }
         try {
-            Status.valueOf(status);
+            Status.valueOf(status.toUpperCase());
         } catch (IllegalArgumentException e) {
             return false;
         }

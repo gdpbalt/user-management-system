@@ -12,7 +12,11 @@ public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Long
 
     Optional<RefreshToken> findByToken(String token);
 
-    Long deleteByUser(User user);
+    Optional<RefreshToken> findByUser(User user);
 
     List<RefreshToken> findByExpiryDateLessThan(LocalDateTime date);
+
+    Long deleteByUser(User user);
+
+    Long deleteByToken(RefreshToken token);
 }

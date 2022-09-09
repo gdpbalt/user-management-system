@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +26,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
-@CrossOrigin
 public class UserController {
     private final UserService userService;
     private final RequestDtoMapper<UserRequestDto, User> userRequestDtoMapper;
@@ -36,6 +34,7 @@ public class UserController {
     @GetMapping
     @ApiOperation(value = "Get list of all users")
     public List<UserResponseDto> findAll() {
+        log.info("Get list of all users");
         return userService.findAll().stream()
                 .map(userResponseDtoMapper::toDto)
                 .collect(Collectors.toList());
@@ -62,14 +61,12 @@ public class UserController {
     @GetMapping("/by-name")
     @ApiOperation(value = "Get information about the user by name")
     public UserResponseDto findUserByName(@RequestParam String name) {
-        log.info("Find user by name: {}", name);
         return userResponseDtoMapper.toDto(userService.findByName(name));
     }
 
     @PostMapping
     @ApiOperation(value = "Create a new user")
     public UserResponseDto createUser(@RequestBody @Valid UserRequestDto dto) {
-        log.info("Create new user: {}", dto);
         User user = userRequestDtoMapper.toModel(dto);
         return userResponseDtoMapper.toDto(userService.save(user));
     }
@@ -78,7 +75,6 @@ public class UserController {
     @ApiOperation(value = "Update information about the user")
     public UserResponseDto updateUser(@RequestBody @Valid UserRequestDto dto,
                                       @PathVariable Long id) {
-        log.info("Update user id={}: {}", id, dto);
         try {
             userService.findById(id);
         } catch (EntityNotFoundException e) {

@@ -1,7 +1,7 @@
 package com.example.usermanagementsystem.controller;
 
-import com.example.usermanagementsystem.dto.response.StatusResponseDto;
 import com.example.usermanagementsystem.dto.mapper.ResponseDtoMapper;
+import com.example.usermanagementsystem.dto.response.StatusResponseDto;
 import com.example.usermanagementsystem.model.Status;
 import io.swagger.annotations.ApiOperation;
 import java.util.Arrays;

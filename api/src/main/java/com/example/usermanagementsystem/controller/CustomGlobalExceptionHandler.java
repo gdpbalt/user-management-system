@@ -25,7 +25,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {AuthenticationException.class, RefreshTokenException.class})
-    public ResponseEntity<ErrorMessageDto> AuthenticationHandler(
+    public ResponseEntity<ErrorMessageDto> authenticationHandler(
             AuthenticationException exception) {
         ErrorMessageDto body = new ErrorMessageDto();
         body.setStatusCode(HttpStatus.FORBIDDEN.value());
@@ -47,7 +47,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     }
 
     @ExceptionHandler(value = InvalidJwtAuthenticationException.class)
-    public ResponseEntity<ErrorMessageDto> InvalidJwtAuthenticationHandler(
+    public ResponseEntity<ErrorMessageDto> invalidJwtAuthenticationHandler(
             InvalidJwtAuthenticationException exception) {
         ErrorMessageDto body = new ErrorMessageDto();
         body.setStatusCode(HttpStatus.UNAUTHORIZED.value());

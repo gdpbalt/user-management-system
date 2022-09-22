@@ -1,4 +1,4 @@
-package com.example.usermanagementsystem.dto;
+package com.example.usermanagementsystem.dto.request;
 
 import com.example.usermanagementsystem.lib.ValidPassword;
 import com.example.usermanagementsystem.lib.ValidRole;
@@ -6,9 +6,11 @@ import com.example.usermanagementsystem.lib.ValidStatus;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class UserRequestDto {
     @NotBlank(message = "mustn't be blank")
     @Size(min = 3, max = 16, message = "size should be between 3 and 16")

@@ -1,7 +1,7 @@
 package com.example.usermanagementsystem.dto.mapper;
 
-import com.example.usermanagementsystem.dto.UserRequestDto;
-import com.example.usermanagementsystem.dto.UserResponseDto;
+import com.example.usermanagementsystem.dto.request.UserRequestDto;
+import com.example.usermanagementsystem.dto.response.UserResponseDto;
 import com.example.usermanagementsystem.model.RoleName;
 import com.example.usermanagementsystem.model.Status;
 import com.example.usermanagementsystem.model.User;

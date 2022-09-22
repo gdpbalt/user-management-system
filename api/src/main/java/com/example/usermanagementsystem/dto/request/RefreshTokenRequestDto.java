@@ -1,9 +1,11 @@
-package com.example.usermanagementsystem.dto;
+package com.example.usermanagementsystem.dto.request;
 
 import javax.validation.constraints.NotBlank;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class RefreshTokenRequestDto {
     @NotBlank
     private String refreshToken;

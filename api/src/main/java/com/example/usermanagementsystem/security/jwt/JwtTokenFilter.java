@@ -1,11 +1,12 @@
 package com.example.usermanagementsystem.security.jwt;
 
-import com.example.usermanagementsystem.dto.ErrorMessageDto;
+import com.example.usermanagementsystem.dto.response.ErrorMessageDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpFilter;
@@ -43,8 +44,11 @@ public class JwtTokenFilter extends HttpFilter {
             response.addHeader("Access-Control-Allow-Origin", "*");
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            ErrorMessageDto errorResponse = new ErrorMessageDto(
-                    HttpStatus.UNAUTHORIZED.value(), new Date(), e.getMessage(), "");
+
+            ErrorMessageDto errorResponse = new ErrorMessageDto();
+            errorResponse.setTimestamp(new Date());
+            errorResponse.setStatusCode(HttpStatus.UNAUTHORIZED.value());
+            errorResponse.setMessage(List.of(e.getMessage()));
             response.getWriter().write(convertObjectToJson(errorResponse));
         }
     }

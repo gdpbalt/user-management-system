@@ -1,6 +1,6 @@
 package com.example.usermanagementsystem.controller;
 
-import com.example.usermanagementsystem.dto.RoleResponseDto;
+import com.example.usermanagementsystem.dto.response.RoleResponseDto;
 import com.example.usermanagementsystem.dto.mapper.ResponseDtoMapper;
 import com.example.usermanagementsystem.model.Role;
 import com.example.usermanagementsystem.service.RoleService;

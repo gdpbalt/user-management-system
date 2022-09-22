@@ -1,8 +1,8 @@
 package com.example.usermanagementsystem.controller;
 
-import com.example.usermanagementsystem.dto.AuthenticationResponseDto;
-import com.example.usermanagementsystem.dto.RefreshTokenRequestDto;
-import com.example.usermanagementsystem.dto.UserRequestLoginDto;
+import com.example.usermanagementsystem.dto.response.AuthenticationResponseDto;
+import com.example.usermanagementsystem.dto.request.RefreshTokenRequestDto;
+import com.example.usermanagementsystem.dto.request.UserRequestLoginDto;
 import com.example.usermanagementsystem.exception.AuthenticationException;
 import com.example.usermanagementsystem.exception.RefreshTokenException;
 import com.example.usermanagementsystem.model.RefreshToken;

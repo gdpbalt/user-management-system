@@ -1,6 +1,6 @@
 package com.example.usermanagementsystem.dto.mapper;
 
-import com.example.usermanagementsystem.dto.RoleResponseDto;
+import com.example.usermanagementsystem.dto.response.RoleResponseDto;
 import com.example.usermanagementsystem.model.Role;
 import org.springframework.stereotype.Component;
 

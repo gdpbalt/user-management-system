@@ -1,6 +1,6 @@
 package com.example.usermanagementsystem.dto.mapper;
 
-import com.example.usermanagementsystem.dto.StatusResponseDto;
+import com.example.usermanagementsystem.dto.response.StatusResponseDto;
 import org.springframework.stereotype.Component;
 
 @Component

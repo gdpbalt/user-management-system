@@ -11,21 +11,21 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationServiceImpl implements AuthenticationService {
-    public static final String INCORRECT_USERNAME_OR_PASSWORD = "Incorrect username or password";
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
     @Override
     public User login(String login, String password) throws AuthenticationException {
+        String authenticationMessage = "Incorrect username or password. User=" + login;
         User user;
         try {
             user = userService.findByName(login);
         } catch (EntityNotFoundException e) {
-            throw new AuthenticationException(INCORRECT_USERNAME_OR_PASSWORD);
+            throw new AuthenticationException(authenticationMessage);
         }
         if (passwordEncoder.matches(password, user.getPassword())) {
             return user;
         }
-        throw new AuthenticationException(INCORRECT_USERNAME_OR_PASSWORD);
+        throw new AuthenticationException(authenticationMessage);
     }
 }

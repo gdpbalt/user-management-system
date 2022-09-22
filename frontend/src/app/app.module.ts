@@ -13,6 +13,7 @@ import { UserViewComponent } from './user-view/user-view.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { LoginComponent } from './login/login.component';
 import { authInterceptorProviders } from './_helper/auth.interceptor';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
     imports: [
@@ -29,6 +30,7 @@ import { authInterceptorProviders } from './_helper/auth.interceptor';
     UserViewComponent,
     UserEditComponent,
     LoginComponent,
+    NavbarComponent
   ],
   providers: [DatePipe, authInterceptorProviders],
   bootstrap: [AppComponent]

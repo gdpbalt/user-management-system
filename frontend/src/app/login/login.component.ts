@@ -29,8 +29,6 @@ export class LoginComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
-    this.tokenStorage.signOut();
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || USER_PAGE;
   }
 
   login() {
@@ -43,7 +41,7 @@ export class LoginComponent implements OnInit {
           this.tokenStorage.saveToken(data.accessToken);
           this.tokenStorage.saveRefreshToken(data.refreshToken);
           this.tokenStorage.saveUser(data);
-          this.router.navigateByUrl(this.returnUrl);
+          window.location.href = USER_PAGE;
           return of(false);
         },
 

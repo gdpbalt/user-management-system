@@ -1,12 +1,10 @@
-import { Time } from "@angular/common"
-
 export interface User {
-  id : number;
-  name : string;
-  password : string;
+  id: number;
+  name: string;
+  password: string;
   firstName: string;
   lastName: string;
-  role : string;
-  status : string;
-  createdAt : Date;
+  role: string;
+  status: string;
+  createdAt: Date;
 }

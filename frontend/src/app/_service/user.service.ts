@@ -6,9 +6,10 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { User } from '../_model/user';
 import { MessageService } from './message.service';
+import { environment } from '../../environments/environment';
 
-const API_URL = 'http://localhost:8080/';
-const API_URL_USER = 'user';
+const API_URL = environment.apiUrl;
+const API_URL_USER = '/user';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -20,8 +21,7 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService) {
-  }
+    private messageService: MessageService) { }
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(API_URL + API_URL_USER)
@@ -33,6 +33,7 @@ export class UserService {
 
   checkIfUserExist<Data>(name: string): Observable<boolean> {
     const url = API_URL + API_URL_USER + '/by-name?name=' + name;
+
     return this.http.get(url, { responseType: 'text', observe: 'response' })
       .pipe(
         map(data => true),
@@ -42,6 +43,7 @@ export class UserService {
 
   getUser(id: number): Observable<User> {
     const url = API_URL + API_URL_USER + '/' + id;
+
     return this.http.get<User>(url).pipe(
       tap(_ => this.log(`fetched user by id=${id}`)),
       catchError(this.handleError<User>(`getUser id=${id}`))
@@ -68,6 +70,7 @@ export class UserService {
 
   lockUser(id: number): Observable<User> {
     const url = API_URL + API_URL_USER + '/' + id + '/lock';
+
     return this.http.get<User>(url)
       .pipe(
         tap(_ => this.log(`locked user by id=${id}`)),
@@ -77,6 +80,7 @@ export class UserService {
 
   unlockUser(id: number): Observable<User> {
     const url = API_URL + API_URL_USER + '/' + id + '/unlock';
+
     return this.http.get<User>(url)
       .pipe(
         tap(_ => this.log(`unlocked user by id=${id}`)),

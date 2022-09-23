@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
-const AUTH_API_URL = 'http://localhost:8080/';
-const AUTH_LOGIN = 'login';
-const AUTH_LOGOUT = 'signout';
-const REFRESH_TOKEN = 'refreshtoken';
+const AUTH_API_URL = environment.apiUrl;
+const AUTH_LOGIN = '/login';
+const AUTH_LOGOUT = '/signout';
+const REFRESH_TOKEN = '/refreshtoken';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -14,6 +15,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AuthService {
+
   constructor(private http: HttpClient) { }
 
   login(login: string, password: string): Observable<any> {
@@ -29,4 +31,5 @@ export class AuthService {
   logout(): Observable<any> {
     return this.http.get(AUTH_API_URL + AUTH_LOGOUT);
   }
+
 }

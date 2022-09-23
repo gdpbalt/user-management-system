@@ -12,6 +12,7 @@ const LOGIN_PAGE = '/login';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+
   private isRefreshing = false;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 

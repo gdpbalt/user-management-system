@@ -33,5 +33,4 @@ export class NavbarComponent implements OnInit {
     this.router.navigate([LOGIN_PAGE]);
     this.isLoggedIn$ = observableOf(false)
   }
-
 }

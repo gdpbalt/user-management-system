@@ -5,13 +5,14 @@ import { DatePipe } from '@angular/common';
   providedIn: 'root'
 })
 export class MessageService {
+
   messages: string[] = [];
   messageLimit = 5;
 
-  constructor(public datepipe: DatePipe) {}
+  constructor(public datepipe: DatePipe) { }
 
   add(message: string) {
-    let currentTime =this.datepipe.transform((new Date), 'hh:mm:ss');
+    let currentTime = this.datepipe.transform((new Date), 'hh:mm:ss');
     this.messages.push(currentTime + ': ' + message);
     if (this.messages.length > this.messageLimit) {
       this.messages.shift();
@@ -21,4 +22,5 @@ export class MessageService {
   clear() {
     this.messages = [];
   }
+
 }

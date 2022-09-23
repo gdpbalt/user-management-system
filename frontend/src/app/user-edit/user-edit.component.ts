@@ -4,10 +4,10 @@ import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { UserService } from '../_service/user.service';
-import { RoleService } from 'src/app/_service/role.service';
+import { RoleService } from '../_service/role.service';
 import { StatusService } from '../_service/status.service';
 import { User } from "../_model/user";
-import { Role } from 'src/app/_model/role';
+import { Role } from '../_model/role';
 import { Status } from '../_model/status';
 import { passwordValidator } from '../_helper/password-validation';
 import { repeatePasswordValidator } from '../_helper/repeat-password-validation';

@@ -16,7 +16,7 @@ public class DataInitializer {
     private static final String ADMIN_USERNAME = "admin";
     private static final String ADMIN_PASSWORD = "test123";
     private static final String USER_USERNAME = "user";
-    private static final String USER_PASSWORD = "test123";
+    private static final String USER_PASSWORD = ADMIN_PASSWORD;
     private final RoleService roleService;
     private final UserService userService;
 

@@ -15,11 +15,7 @@ public interface RefreshTokenService {
 
     RefreshToken verifyExpiration(RefreshToken refreshToken);
 
-    Long deleteByUserId(Long userId);
-
     void deleteByUser(User user);
-
-    Long deleteByToken(RefreshToken token);
 
     void deleteExpiredTokens();
 }

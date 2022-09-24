@@ -5,10 +5,11 @@ import com.example.usermanagementsystem.model.RefreshToken;
 import com.example.usermanagementsystem.model.User;
 import com.example.usermanagementsystem.repository.RefreshTokenRepository;
 import com.example.usermanagementsystem.service.RefreshTokenService;
-import com.example.usermanagementsystem.service.UserService;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -23,7 +24,6 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     @Value("${security.jwt.token.jwtRefreshExpirationSeconds:86400}")
     private Long refreshTokenDurationMs;
     private final RefreshTokenRepository refreshTokenRepository;
-    private final UserService userService;
 
     @Override
     public RefreshToken findByToken(String token) {
@@ -63,22 +63,12 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     }
 
     @Override
-    public Long deleteByUserId(Long userId) {
-        return refreshTokenRepository.deleteByUser(userService.findById(userId));
-    }
-
-    @Override
     public void deleteByUser(User user) {
         List<RefreshToken> refreshTokens =
                 refreshTokenRepository.findByUser(user)
                         .stream()
-                        .toList();
+                        .collect(Collectors.toList());
         refreshTokenRepository.deleteAll(refreshTokens);
-    }
-
-    @Override
-    public Long deleteByToken(RefreshToken token) {
-        return refreshTokenRepository.deleteByToken(token);
     }
 
     @PostConstruct
@@ -87,9 +77,8 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     public void deleteExpiredTokens() {
         log.info("Delete old expired tokens");
         List<RefreshToken> refreshTokens =
-                refreshTokenRepository.findByExpiryDateLessThan(LocalDateTime.now())
-                        .stream()
-                        .toList();
+                new ArrayList<>(
+                        refreshTokenRepository.findByExpiryDateLessThan(LocalDateTime.now()));
         refreshTokenRepository.deleteAll(refreshTokens);
     }
 }

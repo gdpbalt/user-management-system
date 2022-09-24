@@ -1,60 +1,69 @@
 # User management system (THIS IS NOT COMPLETE DOCUMENT)
 
 ### Project description
-Application work with the base of users.
-Have two parts: backend and fronted.
-User can work via an Internet browser with the frontend application
-(SPA application).
-In that time SPA application communicates with the backend part.
+The application needs for control teh list of users.
+It has two parts: backend and fronted.
+User can work via an Internet browser with the frontend application (SPA application) 
+and in that time the SPA application communicates with the backend part.
 
 Pages on the frontend part:
-> /user - show list of user
+   > /login - log in user
 
-> /user/add - add user
+   > /user - show list of user
 
-> /user/edit/:id - edit the user with id
+   > /user/view - view information about user
+
+   > /user/add - add user
+
+   > /user/edit/:id - edit user with id
 
 Main endpoints on the backend part:
-> GET /user - get list of users
+   > GET /user - get list of users
 
-> GET /user/{id} - get info about the user with id
+   > GET /user/{id} - get info about the user with id
 
-> POST /user - create new user
+   > POST /user - create new user
 
-> PUT /user/{id} - update info about the user with id
+   > PUT /user/{id} - update info about the user with id
 
 ### Features
-- Frontend part works on Angular JavaScript framework
-- Backend part works on SpringBoot Java framework
+- The frontend part works on Angular JavaScript framework
+- The backend part works on Spring Boot Java framework
+
+Users have roles: ADMIN or USER. User after authentication gets some role 
+and depends on it can do some operation: VIEW/ADD/EDIT/LOCK user in the application.
 
 ### Project architecture
-Backend part of the project:
+The backend part of the project:
 1. Controllers - Presentation layer
 2. Services - Application layer
 3. DAO - Data access layer
 
-Frontend part of the project:
+The frontend part of the project:
 1. UsersComponent - show list of users
 2. UserEditComponent - add/edit information about the user
 
 ### Technologies used in project
 - Spring Boot 2.7, Spring Web, Spring Jpa
-- MySQL
-- Java v.17
+- MySQL v.8
+- Java v.11
 - Apache Maven v.3.8
 - Docker, Docker compose
 - Angular v.14
 
 ### For launch project
 
-1. Install Docker Desktop and register on DockerHub
+1. You should have ready to use docker, docker-compose and git programs.
 
-2. Run next command in terminal from `user-management-system-api` directory:
+2. Clone this project. Run in terminal:
+   > git clone https://github.com/gdpbalt/user-management-system.git
 
-   > mvn clean package
+3. Build and run project via docker-compose. 
+Go to the project directory and run in terminal: 
+   > docker-compose up
 
-[//]: # (3. Run next command in terminal from the main directory:)
-[//]: # ()
-[//]: # (   > docker-compose up --build)
-[//]: # ()
-[//]: # (4. Open your browser on http://localhost:6868.)
+4. Open in your browser on http://localhost:4200
+
+5. Enter username and password in login form:
+   - user/test123 for user with role USER;
+   - admin/test123 for user with role ADMIN.

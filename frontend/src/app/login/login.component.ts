@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
 import { AuthService } from '../_service/auth.service';
@@ -14,15 +13,14 @@ const USER_PAGE = '/user';
   styleUrls: []
 })
 export class LoginComponent implements OnInit {
+
   formLogin!: FormGroup;
   isLoginFailed = false;
   returnUrl: string = '';
 
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
-    private tokenStorage: TokenStorageService,
-    private route: ActivatedRoute,
-    private router: Router) { }
+    private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     this.formLogin = this.formBuilder.group({
@@ -50,4 +48,5 @@ export class LoginComponent implements OnInit {
         }
       });
   }
+
 }

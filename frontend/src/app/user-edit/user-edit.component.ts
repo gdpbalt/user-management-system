@@ -150,31 +150,31 @@ export class UserEditComponent implements OnInit {
       .subscribe(() => this.goBack());
   }
 
-  get name() {
+  get name(): any {
     return this.userForm.get('name');
   }
 
-  get password() {
+  get password(): any {
     return this.userForm.get('password');
   }
 
-  get repeatPassword() {
+  get repeatPassword(): any {
     return this.userForm.get('repeatPassword');
   }
 
-  get firstName() {
+  get firstName(): any {
     return this.userForm.get('firstName');
   }
 
-  get lastName() {
+  get lastName(): any {
     return this.userForm.get('lastName');
   }
 
-  get role() {
+  get role(): any {
     return this.userForm.get('role');
   }
 
-  get status() {
+  get status(): any {
     return this.userForm.get('status');
   }
 

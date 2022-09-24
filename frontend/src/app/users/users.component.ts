@@ -9,6 +9,7 @@ import { UserService } from '../_service/user.service';
   styleUrls: []
 })
 export class UsersComponent implements OnInit {
+  
   users: User[] = [];
 
   constructor(private userService: UserService) { }

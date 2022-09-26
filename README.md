@@ -41,7 +41,9 @@ The backend part of the project:
 
 The frontend part of the project:
 1. UsersComponent - show list of users
-2. UserEditComponent - add/edit information about the user
+2. UserViewComponent - show information about the user
+3. UserEditComponent - add/edit information about the user
+There a lot of services for working with data.
 
 ### Technologies used in project
 - Spring Boot 2.7, Spring Web, Spring Jpa

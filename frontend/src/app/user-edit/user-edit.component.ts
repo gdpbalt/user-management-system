@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from "@angular/router";
 
 import { UserService } from '../_service/user.service';
 import { RoleService } from '../_service/role.service';
@@ -33,10 +34,11 @@ export class UserEditComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private roleService: RoleService,
-    private statusService: StatusService) { }
+    private statusService: StatusService,
+    private router: Router) { }
 
   ngOnInit(): void {
-    if (this.location.path().toLowerCase().indexOf('edit') > -1) {
+    if (this.router.url.includes('edit')) {
       this.isEditComponent = true;
     }
     this.createFrom();

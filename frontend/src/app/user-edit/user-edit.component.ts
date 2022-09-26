@@ -129,6 +129,7 @@ export class UserEditComponent implements OnInit {
       this.userService.checkIfUserExist(this.name?.value)
         .subscribe(result => {
           if (result) {
+            this.isUserExist = true;
             return;
           } else {
             this.saveData();
@@ -138,7 +139,7 @@ export class UserEditComponent implements OnInit {
   }
 
   saveData(): void {
-    const userChange: User = {
+    const editedUser: User = {
       id: Number(this.userId),
       name: this.name?.value,
       password: this.password?.value,
@@ -148,8 +149,11 @@ export class UserEditComponent implements OnInit {
       status: this.status?.value,
       createdAt: new Date()
     }
-    this.userService.updateUser(userChange)
-      .subscribe(() => this.goBack());
+    if (this.isEditComponent) {
+      this.userService.updateUser(editedUser).subscribe(() => this.goBack());
+    } else {
+      this.userService.addUser(editedUser).subscribe(() => this.goBack());
+    }
   }
 
   get name(): any {

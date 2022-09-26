@@ -1,5 +1,5 @@
 <div>
-  <div class="my-2 fs-4 text-center">Users list</div>
+  <div class="my-2 fs-4 text-center">List of users</div>
 
   <table class="table table-striped">
     <thead class="table-primary">
@@ -24,11 +24,16 @@
         <td>{{ user.role | titlecase }}</td>
         <td>{{ user.status | titlecase }}</td>
         <td>{{ user.createdAt | date: 'dd.MM.YYYY HH:mm' }}</td>
-        <td>
+        <td *ngIf="role === ROLE_USER">
+          <a class="btn btn-sm btn-outline-primary me-3" routerLink="/user/view/{{ user.id }}">View</a>
+        </td>
+        <td *ngIf="role === ROLE_ADMIN">
           <a class="btn btn-sm btn-outline-primary me-3" routerLink="/user/view/{{ user.id }}">View</a>
           <a class="btn btn-sm btn-outline-primary me-3" routerLink="/user/edit/{{ user.id }}">Edit</a>
+
           <button *ngIf="user.status.toLowerCase() === 'active'; else elseBlock" class="btn btn-sm btn-outline-primary"
             (click)="lockUser(user.id)">Lock</button>
+
           <ng-template #elseBlock><button class="btn btn-sm btn-outline-primary"
               (click)="unlockUser(user.id)">Unlock</button></ng-template>
         </td>
@@ -36,7 +41,7 @@
     </tbody>
   </table>
 
-  <div class="my-2">
+  <div class="my-2" *ngIf="role === ROLE_ADMIN">
     <a class="btn btn-sm btn-outline-primary" routerLink="/user/add">Add new user</a>
   </div>
 </div>

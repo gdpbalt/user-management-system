@@ -1,3 +1,0 @@
-//                .antMatchers(HttpMethod.GET, "/user/**").hasAnyRole(USER, ADMIN)
-//                .antMatchers(HttpMethod.GET, "/role").hasAnyRole(USER, ADMIN)
-//                .antMatchers("/users/**").hasRole(ADMIN)

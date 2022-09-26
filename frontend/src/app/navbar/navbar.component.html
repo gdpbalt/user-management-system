@@ -1,0 +1,17 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark" *ngIf="isLoggedIn$ | async">
+  <div class="container-fluid">
+    <a class="navbar-brand">User management system#</a>
+
+    <ul class="navbar-nav me-auto">
+      <li class="nav-item mx-2">
+        <a class="nav-link" routerLink="/user">Users</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item mx-2 ms-auto">
+        <a class="nav-link" (click)="logout()" href>Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>

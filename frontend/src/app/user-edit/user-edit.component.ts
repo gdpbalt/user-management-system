@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { UserService } from '../user.service';
-import { RoleService } from 'src/app/role.service';
-import { StatusService } from '../status.service';
-import { User } from "../user";
-import { Role } from 'src/app/role';
-import { Status } from '../status';
-import { passwordValidator } from '../shared/password-validation';
-import { repeatePasswordValidator } from '../shared/repeat-password-validation';
+import { UserService } from '../_service/user.service';
+import { RoleService } from '../_service/role.service';
+import { StatusService } from '../_service/status.service';
+import { User } from "../_model/user";
+import { Role } from '../_model/role';
+import { Status } from '../_model/status';
+import { passwordValidator } from '../_helper/password-validation';
+import { repeatePasswordValidator } from '../_helper/repeat-password-validation';
 
 @Component({
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
-  styleUrls: ['./user-edit.component.css']
+  styleUrls: []
 })
 export class UserEditComponent implements OnInit {
 
@@ -150,31 +150,31 @@ export class UserEditComponent implements OnInit {
       .subscribe(() => this.goBack());
   }
 
-  get name() {
+  get name(): any {
     return this.userForm.get('name');
   }
 
-  get password() {
+  get password(): any {
     return this.userForm.get('password');
   }
 
-  get repeatPassword() {
+  get repeatPassword(): any {
     return this.userForm.get('repeatPassword');
   }
 
-  get firstName() {
+  get firstName(): any {
     return this.userForm.get('firstName');
   }
 
-  get lastName() {
+  get lastName(): any {
     return this.userForm.get('lastName');
   }
 
-  get role() {
+  get role(): any {
     return this.userForm.get('role');
   }
 
-  get status() {
+  get status(): any {
     return this.userForm.get('status');
   }
 

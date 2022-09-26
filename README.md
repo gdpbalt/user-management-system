@@ -1,7 +1,7 @@
 # User management system (UMS)
 
 ### Project description
-The application needs for control the list of users.
+The application is needed for controlling the list of users.
 It has two parts: backend and fronted.
 User can work via an Internet browser with the frontend single page application (SPA) 
 and in that time the SPA application communicates with the backend part.

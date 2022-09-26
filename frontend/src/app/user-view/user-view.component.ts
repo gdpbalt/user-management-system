@@ -20,10 +20,10 @@ export class UserViewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getUser();
+    this.setUser();
   }
 
-  getUser(): void {
+  setUser(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.userService.getUser(id)
       .subscribe(u => this.user = u);

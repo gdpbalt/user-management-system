@@ -40,18 +40,18 @@ export class UserEditComponent implements OnInit {
       this.isEditComponent = true;
     }
     this.createFrom();
-    this.getRoles();
-    this.getStatuses();
+    this.setRolesFields();
+    this.setStatusesFields();
     if (this.isEditComponent) {
       this.title = "Edit user's detail";
       this.userId = Number(this.route.snapshot.paramMap.get('id'));
-      this.getUser(this.userId);
+      this.setUserFields(this.userId);
     } else {
       this.title = "Add new user";
     }
   }
 
-  getUser(id: number): void {
+  setUserFields(id: number): void {
     this.userService.getUser(id)
       .subscribe(user => {
         this.userForm.patchValue({
@@ -64,12 +64,12 @@ export class UserEditComponent implements OnInit {
       });
   }
 
-  getRoles(): void {
+  setRolesFields(): void {
     this.roleService.getRoles()
       .subscribe(r => this.roles = r);
   }
 
-  getStatuses(): void {
+  setStatusesFields(): void {
     this.statusService.getStatuses()
       .subscribe(s => this.statuses = s);
   }

@@ -9,7 +9,7 @@ export class AuthGuardService implements CanActivate {
 
   constructor(
     private tokenStorageService: TokenStorageService,
-    public router: Router) { }
+    private router: Router) { }
 
   canActivate(): boolean {
     if (!this.tokenStorageService.getToken()) {

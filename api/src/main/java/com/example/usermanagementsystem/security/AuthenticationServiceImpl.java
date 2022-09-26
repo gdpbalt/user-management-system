@@ -2,6 +2,7 @@ package com.example.usermanagementsystem.security;
 
 import com.example.usermanagementsystem.exception.AuthenticationException;
 import com.example.usermanagementsystem.exception.EntityNotFoundException;
+import com.example.usermanagementsystem.model.Status;
 import com.example.usermanagementsystem.model.User;
 import com.example.usermanagementsystem.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         } catch (EntityNotFoundException e) {
             throw new AuthenticationException(authenticationMessage);
         }
-        if (passwordEncoder.matches(password, user.getPassword())) {
+        if (passwordEncoder.matches(password, user.getPassword())
+                && user.getStatus() == Status.ACTIVE) {
             return user;
         }
         throw new AuthenticationException(authenticationMessage);

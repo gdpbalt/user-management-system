@@ -15,7 +15,7 @@
         </th>
         <td>
           <input type="text" id="name" class="form-control form-control-sm" formControlName="name"
-            placeHolder="User name">
+            placeHolder="User name" [readonly]="isEditComponent">
           <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="text-danger small">
             <div *ngIf="name?.errors?.['required']">
               Field is required

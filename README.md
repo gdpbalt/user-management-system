@@ -43,15 +43,16 @@ The frontend part of the project:
 1. UsersComponent - show list of users
 2. UserViewComponent - show information about the user
 3. UserEditComponent - add/edit information about the user
+
 There a lot of services for working with data.
 
 ### Technologies used in project
-- Spring Boot 2.7, Spring Web, Spring Jpa
+- Spring Boot 2.7, Spring Web, Spring Data Jpa, Spring Security
 - MySQL v.8
 - Java v.11
+- Angular v.14
 - Apache Maven v.3.8
 - Docker, Docker compose
-- Angular v.14
 
 ### For launch project
 

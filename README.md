@@ -61,12 +61,14 @@ There a lot of services for working with data.
 2. Clone this project. Run in terminal:
    > git clone https://github.com/gdpbalt/user-management-system.git
 
-3. Build and run project via docker-compose. 
+3. Copy file `env.example` to `.env` in the root directory of the project and edit it.  
+
+4. Build and run project via docker-compose. 
 Go to the project directory and run in terminal: 
    > docker-compose up
 
-4. Open in your browser on http://localhost:4200
+5. Open in your browser on http://localhost:4200
 
-5. Enter username and password in login form:
+6. Enter username and password in login form:
    - user/test123 for user with role USER;
    - admin/test123 for user with role ADMIN.
